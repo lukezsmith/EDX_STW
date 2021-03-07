@@ -1,0 +1,7 @@
+Dependencies for Project 'Lab8', Target 'Lab8': (DO NOT MODIFY !)
+CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
+F (.\startup.s)(0x5701A998)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Luminary--pd "__UVISION_VERSION SETA 533"--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
+F (.\SwitchLEDInterface.c)(0x6043DF37)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I .. -I ..\..\..-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Luminary-D__UVISION_VERSION="533" -Drvmdk -DPART_LM4F120H5QR-o .\switchledinterface.o --omf_browse .\switchledinterface.crf --depend .\switchledinterface.d)
+I (TExaS.h)(0x56992152)
+I (..\tm4c123gh6pm.h)(0x51D470B2)
+F (.\texas.o)(0x56991F5E)()
