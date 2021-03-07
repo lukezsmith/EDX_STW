@@ -12,6 +12,11 @@
 #include "TExaS.h"
 #include "tm4c123gh6pm.h"
 
+#define PF0 					(*((volatile unsigned long *)0x40025004))
+#define PF1 					(*((volatile unsigned long *)0x40025008))
+#define PF4 					(*((volatile unsigned long *)0x40025040))
+
+
 // ***** 2. Global Declarations Section *****
 
 // FUNCTION PROTOTYPES: Each subroutine defined
@@ -25,16 +30,16 @@ void EnableInterrupts(void);  // Enable interrupts
 /* 
 This Lab9 starter project is the same as C9_Debugging example but 
 includes the connections to the Lab9 grader. You will make three changes. 
-First, make the LED flash at 10 Hz. In other words, make it turn on for 0.05 seconds, 
+[x] First, make the LED flash at 10 Hz. In other words, make it turn on for 0.05 seconds, 
 and then turn off for 0.05 seconds. 
-Second, make the LED flash if either switch SW1 or SW2 is pressed 
+[] Second, make the LED flash if either switch SW1 or SW2 is pressed 
 (this means flash the LED if either PF4 or PF0 is 0). 
-Third, record PortF bits 4,1,0 every time the input changes or the output changes. 
+[] Third, record PortF bits 4,1,0 every time the input changes or the output changes. 
 For example, if your system detects a change in either PF4 or PF0 input, 
 record PortF bits 4,1,0. If your system causes a change in PF1, record PortF bits 4,1,0. 
 
-If both PF4 and PF0 switch are not pressed, the PF1 output should be low.  
-If either PF4 or PF0 switches is pressed, the output toggles at 10 Hz (±10%). 
+[] If both PF4 and PF0 switch are not pressed, the PF1 output should be low.  
+[] If either PF4 or PF0 switches is pressed, the output toggles at 10 Hz (±10%). 
 Information collected in the Data array matches the I/O on PortF.
 50 data points are collected only on a change in input or a change in output.
 This means no adjacent elements in the array should be equal.
@@ -63,9 +68,8 @@ void SysTick_Init(void){
   NVIC_ST_CURRENT_R = 0;                // any write to current clears it             
   NVIC_ST_CTRL_R = 0x00000005;          // enable SysTick with core clock
 }
-unsigned long Led;
 void Delay(void){unsigned long volatile time;
-  time = 160000; // 0.1sec
+  time = 80000; // 0.05sec
   while(time){
    time--;
   }
@@ -81,19 +85,22 @@ int main(void){  unsigned long i,last,now;
   i = 0;          // array index
   last = NVIC_ST_CURRENT_R;
   EnableInterrupts();           // enable interrupts for the grader
+	PF1 = 0x00; 		// set PF1 low when PF4, PF0 not pressed
   while(1){
-    Led = GPIO_PORTF_DATA_R;   // read previous
-    Led = Led^0x02;            // toggle red LED
-    GPIO_PORTF_DATA_R = Led;   // output 
     if(i<50){
-      now = NVIC_ST_CURRENT_R;
-      Time[i] = (last-now)&0x00FFFFFF;  // 24-bit time difference
-      Data[i] = GPIO_PORTF_DATA_R&0x02; // record PF1
-      last = now;
-      i++;
-    }
-    Delay();
-  }
+			if ((PF0 == 0) || (PF4 == 0)){
+				PF1 ^= 0x02;											// toggle PF1
+				now = NVIC_ST_CURRENT_R;
+				Time[i] = (last-now)&0x00FFFFFF;  // 24-bit time difference
+				Data[i] = GPIO_PORTF_DATA_R;			// record PF1
+				last = now;
+				i++;
+				Delay();
+			} else{
+				PF1 = 0x00;												// set PF1 low
+			}
+		}
+	}
 }
 
 
