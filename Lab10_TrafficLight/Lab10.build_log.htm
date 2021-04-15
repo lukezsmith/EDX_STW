@@ -2,19 +2,43 @@
 <body>
 <pre>
 <h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.33.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Luke Smith, lukezsmith, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.33.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.33.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      lmidk-agdi.dll V???
+Dialog DLL:      TCM.DLL V1.48.0.0
+ 
 <h2>Project:</h2>
-D:\Dropbox\apn176\apntex_176\MySetup\Labware\Lab10_TrafficLight\Lab10.uvproj
-Project File Date:  02/10/2014
+C:\Keil_v5\Labware\Lab10_TrafficLight\Lab10.uvproj
+Project File Date:  04/11/2021
 
 <h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Lab10'
-assembling startup.s...
 compiling TableTrafficLight.c...
+TableTrafficLight.c(98): warning:  #550-D: variable "delay"  was set but never used
+        unsigned long delay;
+TableTrafficLight.c(109): warning:  #550-D: variable "delay"  was set but never used
+        unsigned long delay;
+TableTrafficLight.c(120): warning:  #550-D: variable "delay"  was set but never used
+        unsigned long delay;
+TableTrafficLight.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=3588 RO-data=14296 RW-data=68 ZI-data=1756  
-".\Lab10.axf" - 0 Error(s), 0 Warning(s).
-Clean started: Project: 'Lab10'
-   deleting intermediate output files for target 'Lab10'
+Program Size: Code=4360 RO-data=14692 RW-data=68 ZI-data=1756  
+".\Lab10.axf" - 0 Error(s), 3 Warning(s).
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
